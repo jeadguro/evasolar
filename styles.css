@@ -1,21 +1,38 @@
 /* =============================================
-   EVA SOLAR - Estilo Futurista
-   styles.css
+   EVA SOLAR - Estilo Corporativo Futurista
+   styles.css - V3 con colores oficiales
    ============================================= */
 
-/* ----- Variables CSS ----- */
+/* ----- Variables CSS - Colores Corporativos ----- */
 :root {
-    --neon-green: #00FF88;
-    --neon-blue: #00D4FF;
-    --neon-purple: #8B5CF6;
-    --dark-bg: #0A0A0F;
-    --dark-surface: #111118;
-    --dark-card: #16161F;
-    --dark-border: #252530;
+    /* Colores principales del logo */
+    --eva-blue: #3B5998;
+    --eva-blue-dark: #2C4373;
+    --eva-blue-light: #5B79B8;
+    --eva-green: #4CAF50;
+    --eva-green-dark: #2E7D32;
+    --eva-green-light: #81C784;
+    
+    /* Colores de fondo */
+    --dark-bg: #0A0F1A;
+    --dark-surface: #0F1520;
+    --dark-card: #151C2C;
+    --dark-border: #1E2A40;
+    
+    /* Colores de texto */
     --white: #FFFFFF;
-    --gray: #8888A0;
-    --gradient-main: linear-gradient(90deg, var(--neon-green), var(--neon-blue));
-    --gradient-diagonal: linear-gradient(135deg, var(--neon-green), var(--neon-blue));
+    --gray: #8899AA;
+    --gray-light: #B0BEC5;
+    
+    /* Gradientes */
+    --gradient-main: linear-gradient(90deg, var(--eva-blue), var(--eva-green));
+    --gradient-diagonal: linear-gradient(135deg, var(--eva-blue), var(--eva-green));
+    --gradient-green: linear-gradient(90deg, var(--eva-green-dark), var(--eva-green-light));
+    --gradient-blue: linear-gradient(90deg, var(--eva-blue-dark), var(--eva-blue-light));
+    
+    /* Efectos de brillo */
+    --glow-blue: 0 0 20px rgba(59, 89, 152, 0.5);
+    --glow-green: 0 0 20px rgba(76, 175, 80, 0.5);
 }
 
 /* ----- Reset & Base ----- */
@@ -60,8 +77,8 @@ img {
     width: 100%;
     height: 100%;
     background-image: 
-        linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px);
+        linear-gradient(rgba(59, 89, 152, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 89, 152, 0.03) 1px, transparent 1px);
     background-size: 50px 50px;
     pointer-events: none;
     z-index: 0;
@@ -78,15 +95,15 @@ img {
     z-index: 0;
 }
 
-.glow-effect.green {
-    background: var(--neon-green);
+.glow-effect.blue {
+    background: var(--eva-blue);
     top: -100px;
     left: -100px;
     animation: pulse-glow 8s ease-in-out infinite;
 }
 
-.glow-effect.blue {
-    background: var(--neon-blue);
+.glow-effect.green {
+    background: var(--eva-green);
     bottom: -100px;
     right: -100px;
     animation: pulse-glow 10s ease-in-out infinite reverse;
@@ -104,16 +121,17 @@ nav {
     left: 0;
     right: 0;
     z-index: 1000;
-    padding: 1rem 3rem;
-    background: rgba(10, 10, 15, 0.9);
+    padding: 0.75rem 3rem;
+    background: rgba(10, 15, 26, 0.95);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--dark-border);
     transition: all 0.3s ease;
 }
 
 nav.scrolled {
-    padding: 0.75rem 3rem;
-    background: rgba(10, 10, 15, 0.98);
+    padding: 0.5rem 3rem;
+    background: rgba(10, 15, 26, 0.98);
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
 }
 
 .nav-container {
@@ -125,31 +143,29 @@ nav.scrolled {
 }
 
 .logo {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--white);
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
 
-.logo-icon {
-    width: 40px;
-    height: 40px;
-    background: var(--gradient-diagonal);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.25rem;
+.logo img {
+    height: 50px;
+    width: auto;
 }
 
-.logo span {
-    background: var(--gradient-main);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+.logo-text {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--white);
+}
+
+.logo-text .eva {
+    color: var(--eva-blue);
+}
+
+.logo-text .solar {
+    color: var(--eva-green);
 }
 
 .nav-links {
@@ -174,13 +190,12 @@ nav.scrolled {
     left: 0;
     width: 0;
     height: 2px;
-    background: var(--neon-green);
+    background: var(--gradient-main);
     transition: width 0.3s ease;
-    box-shadow: 0 0 10px var(--neon-green);
 }
 
 .nav-links a:hover {
-    color: var(--neon-green);
+    color: var(--eva-green);
 }
 
 .nav-links a:hover::after {
@@ -189,36 +204,20 @@ nav.scrolled {
 
 .nav-cta {
     padding: 0.75rem 1.5rem;
-    background: transparent;
-    border: 2px solid var(--neon-green);
-    color: var(--neon-green);
+    background: var(--gradient-main);
+    color: var(--white);
     font-family: 'Orbitron', sans-serif;
     font-size: 0.8rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    position: relative;
-    overflow: hidden;
-}
-
-.nav-cta::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: var(--neon-green);
-    transition: left 0.3s ease;
-    z-index: -1;
+    border-radius: 5px;
+    box-shadow: var(--glow-green);
 }
 
 .nav-cta:hover {
-    color: var(--dark-bg);
-}
-
-.nav-cta:hover::before {
-    left: 0;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(76, 175, 80, 0.4);
 }
 
 /* Mobile Menu Toggle */
@@ -233,7 +232,7 @@ nav.scrolled {
 .menu-toggle span {
     width: 25px;
     height: 2px;
-    background: var(--neon-green);
+    background: var(--eva-green);
     transition: all 0.3s ease;
 }
 
@@ -271,11 +270,11 @@ nav.scrolled {
     align-items: center;
     gap: 0.75rem;
     padding: 0.5rem 1rem;
-    background: rgba(0, 255, 136, 0.1);
-    border: 1px solid rgba(0, 255, 136, 0.3);
+    background: rgba(76, 175, 80, 0.1);
+    border: 1px solid rgba(76, 175, 80, 0.3);
     border-radius: 50px;
     font-size: 0.8rem;
-    color: var(--neon-green);
+    color: var(--eva-green);
     margin-bottom: 2rem;
 }
 
@@ -283,10 +282,10 @@ nav.scrolled {
     content: '';
     width: 8px;
     height: 8px;
-    background: var(--neon-green);
+    background: var(--eva-green);
     border-radius: 50%;
     animation: blink 1.5s ease infinite;
-    box-shadow: 0 0 10px var(--neon-green);
+    box-shadow: var(--glow-green);
 }
 
 @keyframes blink {
@@ -334,29 +333,29 @@ nav.scrolled {
     border: none;
     position: relative;
     overflow: hidden;
+    border-radius: 5px;
 }
 
 .btn-primary {
     background: var(--gradient-main);
-    color: var(--dark-bg);
-    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    color: var(--white);
+    box-shadow: var(--glow-green);
 }
 
 .btn-primary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 40px rgba(0, 255, 136, 0.3);
+    box-shadow: 0 15px 40px rgba(76, 175, 80, 0.4);
 }
 
 .btn-secondary {
     background: transparent;
     color: var(--white);
-    border: 1px solid var(--dark-border);
-    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    border: 2px solid var(--eva-blue);
 }
 
 .btn-secondary:hover {
-    border-color: var(--neon-green);
-    color: var(--neon-green);
+    background: var(--eva-blue);
+    box-shadow: var(--glow-blue);
 }
 
 /* ----- Hero Stats ----- */
@@ -376,8 +375,9 @@ nav.scrolled {
     left: 0;
     top: 0;
     bottom: 0;
-    width: 2px;
-    background: linear-gradient(180deg, var(--neon-green), transparent);
+    width: 3px;
+    background: var(--gradient-main);
+    border-radius: 3px;
 }
 
 .stat-number {
@@ -420,7 +420,7 @@ nav.scrolled {
 .energy-core {
     width: 200px;
     height: 200px;
-    background: radial-gradient(circle, var(--neon-green), transparent 70%);
+    background: radial-gradient(circle, var(--eva-green), transparent 70%);
     border-radius: 50%;
     position: relative;
     animation: core-pulse 3s ease-in-out infinite;
@@ -432,17 +432,20 @@ nav.scrolled {
 }
 
 .energy-core::before {
-    content: '⚡';
+    content: '';
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 4rem;
+    width: 100px;
+    height: 100px;
+    background: url('images/logo-evasolar.png') no-repeat center;
+    background-size: contain;
 }
 
 .orbit-ring {
     position: absolute;
-    border: 1px solid rgba(0, 255, 136, 0.2);
+    border: 1px solid rgba(59, 89, 152, 0.3);
     border-radius: 50%;
     animation: rotate 20s linear infinite;
 }
@@ -460,12 +463,17 @@ nav.scrolled {
     position: absolute;
     width: 12px;
     height: 12px;
-    background: var(--neon-green);
+    background: var(--eva-green);
     border-radius: 50%;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    box-shadow: 0 0 20px var(--neon-green);
+    box-shadow: var(--glow-green);
+}
+
+.orbit-ring:nth-child(3) .orbit-dot {
+    background: var(--eva-blue);
+    box-shadow: var(--glow-blue);
 }
 
 .data-card {
@@ -473,19 +481,21 @@ nav.scrolled {
     background: var(--dark-card);
     border: 1px solid var(--dark-border);
     padding: 1rem 1.5rem;
-    clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px));
+    border-radius: 10px;
 }
 
 .data-card.top-right {
     top: 10%;
     right: 0;
     animation: float 4s ease-in-out infinite;
+    border-left: 3px solid var(--eva-green);
 }
 
 .data-card.bottom-left {
     bottom: 20%;
     left: 0;
     animation: float 5s ease-in-out infinite 1s;
+    border-left: 3px solid var(--eva-blue);
 }
 
 @keyframes float {
@@ -495,10 +505,14 @@ nav.scrolled {
 
 .data-card-title {
     font-size: 0.7rem;
-    color: var(--neon-green);
+    color: var(--eva-green);
     text-transform: uppercase;
     letter-spacing: 0.1em;
     margin-bottom: 0.25rem;
+}
+
+.data-card.bottom-left .data-card-title {
+    color: var(--eva-blue);
 }
 
 .data-card-value {
@@ -526,7 +540,7 @@ section {
 .section-tag {
     font-family: 'Orbitron', sans-serif;
     font-size: 0.75rem;
-    color: var(--neon-green);
+    color: var(--eva-green);
     text-transform: uppercase;
     letter-spacing: 0.3em;
     margin-bottom: 1rem;
@@ -536,6 +550,13 @@ section {
     font-size: clamp(2rem, 4vw, 3rem);
     text-transform: uppercase;
     margin-bottom: 1rem;
+}
+
+.section-title span {
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .section-subtitle {
@@ -563,7 +584,7 @@ section {
     position: relative;
     overflow: hidden;
     transition: all 0.4s ease;
-    clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+    border-radius: 10px;
 }
 
 .service-card::before {
@@ -580,9 +601,9 @@ section {
 }
 
 .service-card:hover {
-    border-color: var(--neon-green);
+    border-color: var(--eva-blue);
     transform: translateY(-5px);
-    box-shadow: 0 20px 50px rgba(0, 255, 136, 0.1);
+    box-shadow: 0 20px 50px rgba(59, 89, 152, 0.2);
 }
 
 .service-card:hover::before {
@@ -592,20 +613,21 @@ section {
 .service-icon {
     width: 60px;
     height: 60px;
-    background: rgba(0, 255, 136, 0.1);
-    border: 1px solid rgba(0, 255, 136, 0.3);
+    background: linear-gradient(135deg, rgba(59, 89, 152, 0.2), rgba(76, 175, 80, 0.2));
+    border: 1px solid rgba(59, 89, 152, 0.3);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.75rem;
     margin-bottom: 1.5rem;
-    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    border-radius: 10px;
 }
 
 .service-card h3 {
     font-size: 1.25rem;
     margin-bottom: 0.75rem;
     text-transform: uppercase;
+    color: var(--white);
 }
 
 .service-card p {
@@ -632,12 +654,14 @@ section {
     padding: 2rem;
     background: var(--dark-card);
     border: 1px solid var(--dark-border);
+    border-radius: 10px;
     transition: all 0.3s ease;
 }
 
 .stats-card:hover {
-    border-color: var(--neon-green);
+    border-color: var(--eva-green);
     transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(76, 175, 80, 0.15);
 }
 
 .stats-icon {
@@ -681,16 +705,18 @@ section {
     overflow: hidden;
     transition: all 0.4s ease;
     cursor: pointer;
+    border-radius: 10px;
 }
 
 .project-card:hover {
-    border-color: var(--neon-green);
+    border-color: var(--eva-blue);
     transform: translateY(-5px);
+    box-shadow: 0 20px 50px rgba(59, 89, 152, 0.2);
 }
 
 .project-image {
     height: 200px;
-    background: linear-gradient(135deg, var(--dark-surface), var(--dark-bg));
+    background: linear-gradient(135deg, var(--eva-blue-dark), var(--eva-green-dark));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -712,7 +738,7 @@ section {
 
 .project-tag {
     font-size: 0.7rem;
-    color: var(--neon-green);
+    color: var(--eva-green);
     text-transform: uppercase;
     letter-spacing: 0.15em;
     margin-bottom: 0.5rem;
@@ -741,10 +767,11 @@ section {
     padding: 2rem;
     position: relative;
     transition: all 0.3s ease;
+    border-radius: 10px;
 }
 
 .testimonial-card:hover {
-    border-color: var(--neon-green);
+    border-color: var(--eva-green);
     transform: translateY(-5px);
 }
 
@@ -752,8 +779,11 @@ section {
     content: '"';
     font-family: 'Orbitron', sans-serif;
     font-size: 4rem;
-    color: var(--neon-green);
-    opacity: 0.2;
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    opacity: 0.3;
     position: absolute;
     top: 1rem;
     left: 1.5rem;
@@ -785,8 +815,8 @@ section {
     justify-content: center;
     font-family: 'Orbitron', sans-serif;
     font-weight: 700;
-    color: var(--dark-bg);
-    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    color: var(--white);
+    border-radius: 50%;
 }
 
 .author-name {
@@ -797,7 +827,7 @@ section {
 
 .author-role {
     font-size: 0.8rem;
-    color: var(--neon-green);
+    color: var(--eva-green);
 }
 
 /* ----- Team Section ----- */
@@ -817,10 +847,11 @@ section {
     background: var(--dark-card);
     border: 1px solid var(--dark-border);
     transition: all 0.4s ease;
+    border-radius: 10px;
 }
 
 .team-card:hover {
-    border-color: var(--neon-green);
+    border-color: var(--eva-blue);
     transform: translateY(-5px);
 }
 
@@ -833,7 +864,8 @@ section {
     align-items: center;
     justify-content: center;
     font-size: 3rem;
-    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    border-radius: 50%;
+    border: 3px solid var(--dark-border);
 }
 
 .team-card h3 {
@@ -844,7 +876,7 @@ section {
 
 .team-card span {
     font-size: 0.8rem;
-    color: var(--neon-green);
+    color: var(--eva-green);
     text-transform: uppercase;
     letter-spacing: 0.1em;
 }
@@ -865,10 +897,12 @@ section {
     margin-bottom: 1rem;
     background: var(--dark-card);
     transition: all 0.3s ease;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .faq-item:hover {
-    border-color: rgba(0, 255, 136, 0.5);
+    border-color: rgba(76, 175, 80, 0.5);
 }
 
 .faq-question {
@@ -883,12 +917,19 @@ section {
 }
 
 .faq-question:hover {
-    color: var(--neon-green);
+    color: var(--eva-green);
 }
 
 .faq-question span {
-    font-size: 1.5rem;
-    color: var(--neon-green);
+    width: 30px;
+    height: 30px;
+    background: var(--gradient-main);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: var(--white);
     transition: transform 0.3s ease;
 }
 
@@ -931,6 +972,13 @@ section {
     margin-bottom: 1.5rem;
 }
 
+.contact-info h2 span {
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
 .contact-info p {
     font-size: 1.1rem;
     color: var(--gray);
@@ -950,28 +998,31 @@ section {
     padding: 1rem;
     background: var(--dark-card);
     border: 1px solid var(--dark-border);
+    border-radius: 10px;
     transition: all 0.3s ease;
+    color: var(--white);
 }
 
 .contact-method:hover {
-    border-color: var(--neon-green);
+    border-color: var(--eva-green);
     transform: translateX(10px);
 }
 
 .contact-method-icon {
     width: 50px;
     height: 50px;
-    background: rgba(0, 255, 136, 0.1);
-    border: 1px solid rgba(0, 255, 136, 0.3);
+    background: linear-gradient(135deg, rgba(59, 89, 152, 0.2), rgba(76, 175, 80, 0.2));
+    border: 1px solid rgba(76, 175, 80, 0.3);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.25rem;
+    border-radius: 10px;
 }
 
 .contact-method-text span {
     font-size: 0.7rem;
-    color: var(--neon-green);
+    color: var(--eva-green);
     text-transform: uppercase;
     letter-spacing: 0.1em;
     display: block;
@@ -987,7 +1038,7 @@ section {
     background: var(--dark-card);
     border: 1px solid var(--dark-border);
     padding: 2.5rem;
-    clip-path: polygon(0 0, calc(100% - 30px) 0, 100% 30px, 100% 100%, 30px 100%, 0 calc(100% - 30px));
+    border-radius: 15px;
 }
 
 .form-group {
@@ -998,7 +1049,7 @@ section {
     display: block;
     font-family: 'Orbitron', sans-serif;
     font-size: 0.75rem;
-    color: var(--neon-green);
+    color: var(--eva-green);
     text-transform: uppercase;
     letter-spacing: 0.1em;
     margin-bottom: 0.75rem;
@@ -1015,14 +1066,15 @@ section {
     font-family: 'Exo 2', sans-serif;
     font-size: 1rem;
     transition: border-color 0.3s ease;
+    border-radius: 8px;
 }
 
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
     outline: none;
-    border-color: var(--neon-green);
-    box-shadow: 0 0 0 2px rgba(0, 255, 136, 0.1);
+    border-color: var(--eva-green);
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
 }
 
 .form-group textarea {
@@ -1033,7 +1085,7 @@ section {
 .form-group select {
     cursor: pointer;
     appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2300FF88' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%234CAF50' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 1rem center;
 }
@@ -1046,7 +1098,7 @@ section {
     width: 100%;
     padding: 1.25rem;
     background: var(--gradient-main);
-    color: var(--dark-bg);
+    color: var(--white);
     border: none;
     font-family: 'Orbitron', sans-serif;
     font-size: 0.9rem;
@@ -1055,12 +1107,13 @@ section {
     letter-spacing: 0.1em;
     cursor: pointer;
     transition: all 0.3s ease;
-    clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+    border-radius: 8px;
+    box-shadow: var(--glow-green);
 }
 
 .submit-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 40px rgba(0, 255, 136, 0.3);
+    box-shadow: 0 15px 40px rgba(76, 175, 80, 0.4);
 }
 
 /* ----- Footer ----- */
@@ -1081,16 +1134,27 @@ footer {
 }
 
 .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.footer-logo img {
+    height: 40px;
+}
+
+.footer-logo-text {
     font-family: 'Orbitron', sans-serif;
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     font-weight: 700;
 }
 
-.footer-logo span {
-    background: var(--gradient-main);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+.footer-logo-text .eva {
+    color: var(--eva-blue);
+}
+
+.footer-logo-text .solar {
+    color: var(--eva-green);
 }
 
 .footer-links {
@@ -1104,7 +1168,7 @@ footer {
 }
 
 .footer-links a:hover {
-    color: var(--neon-green);
+    color: var(--eva-green);
 }
 
 .footer-copy {
@@ -1119,20 +1183,21 @@ footer {
     right: 2rem;
     width: 60px;
     height: 60px;
-    background: var(--gradient-diagonal);
+    background: #25D366;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--dark-bg);
+    color: white;
     font-size: 1.75rem;
-    box-shadow: 0 4px 30px rgba(0, 255, 136, 0.4);
+    box-shadow: 0 4px 30px rgba(37, 211, 102, 0.4);
     transition: all 0.3s ease;
     z-index: 999;
-    clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+    border-radius: 50%;
 }
 
 .whatsapp-btn:hover {
     transform: scale(1.1);
+    box-shadow: 0 6px 40px rgba(37, 211, 102, 0.6);
 }
 
 /* ----- Animations ----- */
@@ -1160,7 +1225,7 @@ footer {
 
 @media (max-width: 1024px) {
     nav {
-        padding: 1rem 2rem;
+        padding: 0.75rem 2rem;
     }
     
     .nav-links {
@@ -1246,16 +1311,11 @@ footer {
 
 @media (max-width: 480px) {
     nav {
-        padding: 1rem;
+        padding: 0.75rem 1rem;
     }
     
-    .logo {
-        font-size: 1.25rem;
-    }
-    
-    .logo-icon {
-        width: 35px;
-        height: 35px;
+    .logo img {
+        height: 40px;
     }
     
     section {
