@@ -3,247 +3,1302 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="EVA Solar - Energía Verde Alternativa. Soluciones innovadoras en energía solar, paneles solares, almacenamiento, turbinas de viento e internet Starlink. Ahorra hasta 70% en tu factura eléctrica.">
-    <meta name="keywords" content="energía solar, paneles solares, energía renovable, ahorro energético, Starlink, Sinaloa, México, EVA Solar">
-    <meta name="author" content="EVA Solar">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="EVA Solar | Energía Verde Alternativa">
-    <meta property="og:description" content="Soluciones innovadoras en energía solar. Reduce hasta 70% tu factura eléctrica.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://evasolar.mx">
-    <meta property="og:image" content="images/logo-evasolar.png">
-    
-    <title>EVA Solar | Energía Verde Alternativa</title>
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="images/logo-evasolar.png">
-    
-    <!-- Google Fonts -->
+    <meta name="description" content="EVA Solar - Energía Verde Alternativa. Sistemas de paneles solares, Starlink y soluciones de energía renovable en Culiacán, Sinaloa.">
+    <title>EVA Solar | Energía Verde Alternativa - Culiacán, Sinaloa</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Exo+2:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/logo-evasolar.png">
+    <style>
+        :root {
+            --primary: #3B5998;
+            --primary-dark: #2C4373;
+            --secondary: #4CAF50;
+            --secondary-dark: #2E7D32;
+            --orange: #FF6B35;
+            --orange-dark: #E55A2B;
+            --white: #FFFFFF;
+            --light: #F5F7FA;
+            --light-gray: #E8ECF0;
+            --gray: #6B7A8C;
+            --dark: #0F172A;
+            --dark-card: #1E293B;
+            --text: #333333;
+            --shadow: 0 5px 30px rgba(0,0,0,0.08);
+            --shadow-lg: 0 15px 50px rgba(0,0,0,0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Open Sans', sans-serif; color: var(--text); line-height: 1.7; background: var(--white); overflow-x: hidden; }
+        h1, h2, h3, h4, h5 { font-family: 'Montserrat', sans-serif; font-weight: 700; }
+        a { text-decoration: none; color: inherit; transition: all 0.3s; }
+        img { max-width: 100%; height: auto; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* ==========================================
+           LOADING SCREEN CON LOGO ANIMADO REAL
+           ========================================== */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* Contenedor del logo animado */
+        .animated-logo-container {
+            width: 250px;
+            height: 250px;
+            position: relative;
+        }
+
+        /* Cada parte del logo */
+        .logo-part {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transform: scale(0.3);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .logo-part img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Animación de aparición */
+        .logo-part.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Hoja - aparece primera con efecto especial */
+        .logo-hoja {
+            z-index: 1;
+        }
+
+        .logo-hoja.visible {
+            animation: leafBounce 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes leafBounce {
+            0% {
+                opacity: 0;
+                transform: scale(0) rotate(-45deg);
+            }
+            50% {
+                transform: scale(1.1) rotate(5deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        /* Paneles - aparecen con efecto pop */
+        .logo-panel {
+            z-index: 2;
+        }
+
+        .logo-panel.visible {
+            animation: panelPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes panelPop {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            60% {
+                transform: scale(1.15);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Efecto de brillo después de completar */
+        .logo-complete .logo-part {
+            filter: drop-shadow(0 0 20px rgba(59, 89, 152, 0.3));
+        }
+
+        /* Texto del logo */
+        .logo-text-animated {
+            margin-top: 40px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .logo-text-animated.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .logo-text-animated .eva { color: var(--primary); }
+        .logo-text-animated .solar { color: var(--secondary); }
+
+        .loading-tagline {
+            margin-top: 12px;
+            font-size: 1rem;
+            color: var(--gray);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease 0.2s;
+        }
+
+        .loading-tagline.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Barra de progreso */
+        .loading-progress {
+            position: absolute;
+            bottom: 80px;
+            width: 200px;
+            height: 4px;
+            background: var(--light-gray);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .loading-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 50px;
+            transition: all 0.3s;
+        }
+
+        header.scrolled {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            padding: 15px 50px;
+        }
+
+        header.scrolled .nav-menu a { color: var(--dark); }
+        header.scrolled .nav-menu a:hover { color: var(--secondary); }
+        header.scrolled .mobile-toggle { color: var(--dark); }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img { height: 45px; }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+
+        .logo-text .eva { color: var(--primary); }
+        .logo-text .solar { color: var(--secondary); }
+
+        header:not(.scrolled) .logo-text .eva { color: var(--white); }
+
+        .nav-menu {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: var(--white);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .nav-menu a:hover { color: var(--secondary); }
+
+        .header-cta {
+            padding: 12px 25px;
+            background: var(--orange);
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.8rem;
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .header-cta:hover {
+            background: var(--orange-dark);
+            transform: translateY(-2px);
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--white);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(15,23,42,0.75) 0%, rgba(15,23,42,0.5) 100%);
+        }
+
+        .hero-bg-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a4a7a 0%, #2d6a9f 50%, #4a90c2 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 0 50px;
+            max-width: 750px;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            font-weight: 900;
+            color: var(--white);
+            line-height: 1.1;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 span { color: var(--orange); }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 35px;
+            max-width: 500px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 35px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .btn-primary {
+            background: var(--orange);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--orange-dark);
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--dark);
+        }
+
+        /* Hero Stats */
+        .hero-stats {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 30px 50px;
+            border-radius: 12px;
+            display: flex;
+            gap: 60px;
+            z-index: 10;
+        }
+
+        .stat-item { text-align: center; }
+
+        .stat-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--orange);
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .services-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 60px;
+        }
+
+        .services-title h2 {
+            font-size: 2.8rem;
+            color: var(--dark);
+        }
+
+        .services-title h2 span { color: var(--orange); }
+
+        .services-title p {
+            color: var(--gray);
+            margin-top: 10px;
+            font-size: 1.05rem;
+        }
+
+        .services-btn {
+            padding: 14px 28px;
+            background: var(--dark);
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .services-btn:hover { background: var(--orange); }
+
+        .services-slider {
+            display: flex;
+            gap: 25px;
+            overflow-x: auto;
+            padding-bottom: 20px;
+            scroll-snap-type: x mandatory;
+        }
+
+        .services-slider::-webkit-scrollbar { height: 6px; }
+        .services-slider::-webkit-scrollbar-track { background: var(--light-gray); border-radius: 10px; }
+        .services-slider::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 10px; }
+
+        .service-card {
+            min-width: 280px;
+            background: var(--white);
+            padding: 35px 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            scroll-snap-align: start;
+            transition: all 0.3s;
+            border: 1px solid var(--light-gray);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--orange);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(255,107,53,0.1), rgba(255,107,53,0.05));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--orange);
+        }
+
+        .service-card h3 {
+            font-size: 1.15rem;
+            color: var(--dark);
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            min-height: 70px;
+        }
+
+        .service-price {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--dark);
+        }
+
+        .service-price span {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--gray);
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 100px 0;
+            background: var(--dark);
+        }
+
+        .projects .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .projects .section-header h2 {
+            font-size: 2.8rem;
+            color: var(--white);
+            margin-bottom: 15px;
+        }
+
+        .projects .section-header p {
+            color: rgba(255,255,255,0.7);
+            font-size: 1.1rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .project-card:hover { transform: translateY(-10px); }
+
+        .project-image {
+            height: 220px;
+            overflow: hidden;
+            border-radius: 15px;
+            margin: 15px 15px 0;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .project-card:hover .project-image img { transform: scale(1.05); }
+
+        .project-image-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: rgba(255,255,255,0.3);
+        }
+
+        .project-info { padding: 20px 25px 25px; }
+
+        .project-info h3 {
+            font-size: 1.15rem;
+            color: var(--white);
+            margin-bottom: 5px;
+        }
+
+        .project-location {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 15px;
+        }
+
+        .project-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 12px 20px;
+            text-align: center;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+
+        .project-btn.primary {
+            background: var(--orange);
+            color: var(--white);
+        }
+
+        .project-btn.primary:hover { background: var(--orange-dark); }
+
+        .project-btn.outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .project-btn.outline:hover {
+            border-color: var(--white);
+            background: var(--white);
+            color: var(--dark);
+        }
+
+        .project-desc {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+            margin-top: 15px;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 100px 0;
+            background: var(--light);
+        }
+
+        .testimonials .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .testimonials .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+        }
+
+        .testimonials .section-header h2 span { color: var(--orange); }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .testimonial-stars {
+            color: var(--orange);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .testimonial-text {
+            font-size: 0.95rem;
+            color: var(--gray);
+            font-style: italic;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        .author-name {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 0.95rem;
+        }
+
+        .author-location {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        /* About Section */
+        .about {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .about .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-image { position: relative; }
+
+        .about-image-main {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .about-image-main img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+        }
+
+        .about-badge {
+            position: absolute;
+            bottom: -25px;
+            right: -25px;
+            background: var(--orange);
+            color: var(--white);
+            padding: 25px 35px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .about-badge-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+
+        .about-badge-text { font-size: 0.85rem; }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 25px;
+        }
+
+        .about-content h2 span { color: var(--orange); }
+
+        .about-content p {
+            color: var(--gray);
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .about-feature-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--orange);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .about-feature span {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 100px 0;
+            background: var(--light);
+        }
+
+        .contact .container {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+        }
+
+        .contact-info h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+
+        .contact-info h2 span { color: var(--orange); }
+
+        .contact-info > p {
+            color: var(--gray);
+            margin-bottom: 35px;
+            font-size: 1.05rem;
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: var(--white);
+            border-radius: 12px;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .contact-method:hover {
+            border-color: var(--orange);
+            transform: translateX(10px);
+        }
+
+        .contact-method-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--orange);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: white;
+        }
+
+        .contact-method-text span {
+            font-size: 0.75rem;
+            color: var(--orange);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .contact-method-text strong {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            color: var(--dark);
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-title {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-group { margin-bottom: 20px; }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 18px;
+            background: var(--light);
+            border: 2px solid var(--light-gray);
+            border-radius: 10px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text);
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--orange);
+            background: var(--white);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--orange);
+            color: var(--white);
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+
+        .submit-btn:hover {
+            background: var(--orange-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 70px 0 25px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-brand img { 
+            height: 50px; 
+            margin-bottom: 20px; 
+        }
+
+        .footer-brand p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 10px;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .footer-social a:hover { background: var(--orange); }
+
+        .footer-col h4 {
+            font-size: 1rem;
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--orange);
+            display: inline-block;
+        }
+
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 12px; }
+        .footer-col a { color: rgba(255,255,255,0.7); font-size: 0.9rem; }
+        .footer-col a:hover { color: var(--orange); }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            box-shadow: 0 5px 25px rgba(37,211,102,0.5);
+            z-index: 999;
+            transition: all 0.3s;
+        }
+
+        .whatsapp-btn:hover { transform: scale(1.1); }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero h1 { font-size: 3rem; }
+            .hero-stats { gap: 40px; padding: 25px 40px; }
+            .about .container, .contact .container { grid-template-columns: 1fr; }
+            .projects-grid, .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+            .services-header { flex-direction: column; gap: 20px; }
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 15px 20px; }
+            .nav-menu, .header-cta { display: none; }
+            .mobile-toggle { display: block; }
+            
+            .hero { min-height: auto; padding: 140px 0 180px; }
+            .hero-content { padding: 0 20px; }
+            .hero h1 { font-size: 2rem; }
+            .hero-buttons { flex-direction: column; }
+            .hero-stats {
+                position: relative;
+                bottom: auto;
+                left: auto;
+                transform: none;
+                margin: 30px 20px 0;
+                flex-direction: column;
+                gap: 20px;
+                padding: 25px;
+            }
+            
+            .services, .projects, .testimonials, .about, .contact { padding: 70px 0; }
+            .services-title h2, .projects .section-header h2, .about-content h2, .contact-info h2 { font-size: 2rem; }
+            .projects-grid, .testimonials-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .footer-social { justify-content: center; }
+            .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+            .form-row { grid-template-columns: 1fr; }
+            .about-badge { position: static; margin-top: 20px; }
+            .about-features { grid-template-columns: 1fr; }
+            
+            .animated-logo-container { width: 180px; height: 180px; }
+            .logo-text-animated { font-size: 1.6rem; }
+        }
+    </style>
 </head>
 <body>
-    <!-- Background Effects -->
-    <div class="cyber-grid"></div>
-    <div class="glow-effect blue"></div>
-    <div class="glow-effect green"></div>
+    <!-- Loading Screen con Logo Animado -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="animated-logo-container" id="animated-logo">
+            <!-- Hoja -->
+            <div class="logo-part logo-hoja" id="hoja">
+                <img src="images/logo-evasolarhoja.png" alt="Hoja">
+            </div>
+            
+            <!-- Fila 1 de paneles (arriba) -->
+            <div class="logo-part logo-panel" id="panel1">
+                <img src="images/logo-evasolar1.png" alt="Panel 1">
+            </div>
+            <div class="logo-part logo-panel" id="panel2">
+                <img src="images/logo-evasolar2.png" alt="Panel 2">
+            </div>
+            <div class="logo-part logo-panel" id="panel3">
+                <img src="images/logo-evasolar3.png" alt="Panel 3">
+            </div>
+            
+            <!-- Fila 2 de paneles (medio) -->
+            <div class="logo-part logo-panel" id="panel21">
+                <img src="images/logo-evasolar21.png" alt="Panel 21">
+            </div>
+            <div class="logo-part logo-panel" id="panel22">
+                <img src="images/logo-evasolar22.png" alt="Panel 22">
+            </div>
+            <div class="logo-part logo-panel" id="panel23">
+                <img src="images/logo-evasolar23.png" alt="Panel 23">
+            </div>
+            
+            <!-- Fila 3 de paneles (abajo) -->
+            <div class="logo-part logo-panel" id="panel31">
+                <img src="images/logo-evasolar31.png" alt="Panel 31">
+            </div>
+            <div class="logo-part logo-panel" id="panel32">
+                <img src="images/logo-evasolar32.png" alt="Panel 32">
+            </div>
+            <div class="logo-part logo-panel" id="panel33">
+                <img src="images/logo-evasolar33.png" alt="Panel 33">
+            </div>
+        </div>
+        
+        <div class="logo-text-animated" id="logo-text">
+            <span class="eva">EVA</span> <span class="solar">SOLAR</span>
+        </div>
+        <p class="loading-tagline" id="tagline">Energía Verde Alternativa</p>
+        
+        <div class="loading-progress">
+            <div class="loading-progress-bar" id="progress-bar"></div>
+        </div>
+    </div>
 
-    <!-- Navigation -->
-    <nav>
+    <!-- Header -->
+    <header id="header">
         <div class="nav-container">
             <a href="#" class="logo">
-                <img src="images/logo-evasolar.png" alt="EVA Solar Logo">
+                <img src="images/logo-evasolar.png" alt="EVA Solar">
+                <div class="logo-text"><span class="eva">EVA</span> <span class="solar">SOLAR</span></div>
             </a>
-            
-            <ul class="nav-links">
+            <ul class="nav-menu">
+                <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#servicios">Servicios</a></li>
                 <li><a href="#proyectos">Proyectos</a></li>
                 <li><a href="#testimonios">Testimonios</a></li>
-                <li><a href="#equipo">Equipo</a></li>
-                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#nosotros">Sobre Nosotros</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
-            
-            <a href="https://wa.me/526677950481" class="nav-cta" target="_blank">Cotizar Ahora</a>
-            
-            <div class="menu-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+            <a href="#contacto" class="header-cta">Solicitar Cotización</a>
+            <button class="mobile-toggle">☰</button>
         </div>
-    </nav>
+    </header>
 
     <!-- Hero Section -->
     <section class="hero" id="inicio">
-        <div class="hero-container">
-            <div class="hero-content">
-                <div class="hero-badge">Sistema Activo • Generando Energía Limpia</div>
-                <h1>La <span class="highlight">Energía Verde Alternativa</span> está aquí</h1>
-                <p>Soluciones innovadoras, eficientes y sostenibles en energía solar. Transformamos el acceso a la energía, reducimos costos y cuidamos el medio ambiente.</p>
-                
-                <div class="hero-buttons">
-                    <a href="https://wa.me/526677950481" class="btn btn-primary" target="_blank">Solicitar Cotización</a>
-                    <a href="https://tienda.evasolar.mx" class="btn btn-secondary" target="_blank">Ver Catálogo</a>
-                </div>
-                
-                <div class="hero-stats">
-                    <div class="stat">
-                        <div class="stat-number">1.5K+</div>
-                        <div class="stat-label">Clientes Satisfechos</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">70%</div>
-                        <div class="stat-label">Ahorro Promedio</div>
-                    </div>
-                </div>
+        <div class="hero-bg">
+            <img src="images/hero-bg.jpg" alt="Paneles Solares" 
+                 onerror="this.parentElement.innerHTML='<div class=\'hero-bg-placeholder\'></div>'">
+        </div>
+        
+        <div class="hero-content">
+            <h1>ENERGÍA SOLAR<br>PARA TU <span>FUTURO</span></h1>
+            <p>Soluciones sostenibles que transforman la luz del sol en ahorro real para tu hogar o empresa</p>
+            <div class="hero-buttons">
+                <a href="#contacto" class="btn btn-primary">Cotiza Gratis</a>
+                <a href="#servicios" class="btn btn-secondary">Conoce Más</a>
             </div>
-            
-            <div class="hero-visual">
-                <div class="hero-graphic">
-                    <div class="energy-core"></div>
-                    <div class="orbit-ring"><div class="orbit-dot"></div></div>
-                    <div class="orbit-ring"><div class="orbit-dot"></div></div>
-                    <div class="orbit-ring"><div class="orbit-dot"></div></div>
-                </div>
-                
-                <div class="data-card top-right">
-                    <div class="data-card-title">Generación</div>
-                    <div class="data-card-value">4.5 kW/h</div>
-                </div>
-                
-                <div class="data-card bottom-left">
-                    <div class="data-card-title">Ahorro Mensual</div>
-                    <div class="data-card-value">$2,500</div>
-                </div>
+        </div>
+
+        <div class="hero-stats">
+            <div class="stat-item">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Instalaciones<br>Completadas</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">15+</div>
+                <div class="stat-label">Años de<br>Experiencia</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">98%</div>
+                <div class="stat-label">Clientes<br>Satisfechos</div>
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
     <section class="services" id="servicios">
-        <div class="section-container">
-            <div class="section-header">
-                <div class="section-tag">// Nuestros Servicios</div>
-                <h2 class="section-title">Soluciones en <span>Energía Renovable</span></h2>
-                <p class="section-subtitle">Tecnología de punta para hogares, empresas y comunidades.</p>
+        <div class="container">
+            <div class="services-header">
+                <div class="services-title">
+                    <h2>NUESTROS <span>SERVICIOS</span></h2>
+                    <p>Soluciones integrales de energía solar adaptadas a tus necesidades</p>
+                </div>
+                <a href="#contacto" class="services-btn">Ver todos los servicios →</a>
             </div>
             
-            <div class="services-grid">
+            <div class="services-slider">
                 <div class="service-card">
                     <div class="service-icon">☀️</div>
-                    <h3>Paneles Solares</h3>
-                    <p>Sistemas fotovoltaicos de alta eficiencia para generación de energía limpia y renovable.</p>
+                    <h3>Instalación Residencial</h3>
+                    <p>Sistemas solares completos para hogares con garantía extendida y máximo rendimiento</p>
+                    <div class="service-price"><span>Desde</span> $45,000</div>
                 </div>
-                
+                <div class="service-card">
+                    <div class="service-icon">🏢</div>
+                    <h3>Instalación Comercial</h3>
+                    <p>Soluciones a gran escala para empresas con retorno de inversión garantizado</p>
+                    <div class="service-price"><span>Desde</span> $150,000</div>
+                </div>
                 <div class="service-card">
                     <div class="service-icon">🔋</div>
-                    <h3>Almacenamiento de Energía</h3>
-                    <p>Baterías de última generación para almacenar y usar energía cuando la necesites.</p>
+                    <h3>Sistemas de Almacenamiento</h3>
+                    <p>Baterías de última generación para independencia energética total</p>
+                    <div class="service-price"><span>Desde</span> $32,000</div>
                 </div>
-                
                 <div class="service-card">
-                    <div class="service-icon">💨</div>
-                    <h3>Turbinas de Viento</h3>
-                    <p>Generadores eólicos para complementar tu sistema de energía renovable.</p>
+                    <div class="service-icon">🔧</div>
+                    <h3>Mantenimiento y Reparación</h3>
+                    <p>Servicio técnico especializado para mantener tu sistema en óptimas condiciones</p>
+                    <div class="service-price"><span>Desde</span> $1,500</div>
                 </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">🛠️</div>
-                    <h3>Servicio Técnico</h3>
-                    <p>Mantenimiento preventivo y correctivo para garantizar el máximo rendimiento.</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">💡</div>
-                    <h3>Iluminación Solar</h3>
-                    <p>Soluciones de iluminación autónoma para espacios públicos y privados.</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">🚦</div>
-                    <h3>Semáforos Solares</h3>
-                    <p>Sistemas de señalización vial alimentados por energía solar.</p>
-                </div>
-                
                 <div class="service-card">
                     <div class="service-icon">📡</div>
                     <h3>Internet Starlink</h3>
-                    <p>Distribuidor autorizado de internet satelital de alta velocidad. Conexión en cualquier lugar, sin límites geográficos.</p>
+                    <p>Internet satelital de alta velocidad para zonas rurales y remotas</p>
+                    <div class="service-price"><span>Desde</span> $5,999</div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="stats-section">
-        <div class="stats-grid">
-            <div class="stats-card">
-                <div class="stats-icon">👥</div>
-                <div class="stats-number">1.5K+</div>
-                <div class="stats-label">Clientes Satisfechos</div>
-            </div>
-            
-            <div class="stats-card">
-                <div class="stats-icon">⚡</div>
-                <div class="stats-number">70%</div>
-                <div class="stats-label">Ahorro Promedio</div>
-            </div>
-            
-            <div class="stats-card">
-                <div class="stats-icon">🏗️</div>
-                <div class="stats-number">500+</div>
-                <div class="stats-label">Proyectos Realizados</div>
-            </div>
-            
-            <div class="stats-card">
-                <div class="stats-icon">🌱</div>
-                <div class="stats-number">10K+</div>
-                <div class="stats-label">Tons CO2 Evitadas</div>
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>Monitoreo 24/7</h3>
+                    <p>Sistema de monitoreo en tiempo real con reportes mensuales de rendimiento</p>
+                    <div class="service-price"><span>Desde</span> $500<span>/mes</span></div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Projects Section -->
     <section class="projects" id="proyectos">
-        <div class="section-container">
+        <div class="container">
             <div class="section-header">
-                <div class="section-tag">// Proyectos Recientes</div>
-                <h2 class="section-title">Casos de <span>Éxito</span></h2>
-                <p class="section-subtitle">Conoce algunos de los proyectos que hemos realizado.</p>
+                <h2>Proyectos que Iluminan el Camino</h2>
+                <p>Descubre algunas de nuestras instalaciones más destacadas</p>
             </div>
             
             <div class="projects-grid">
                 <div class="project-card">
-                    <div class="project-image">🏘️</div>
-                    <div class="project-content">
-                        <div class="project-tag">Comunidades</div>
-                        <h3>Comunidades Sostenibles</h3>
+                    <div class="project-image">
+                        <img src="images/proyecto-1.jpg" alt="Residencia" 
+                             onerror="this.parentElement.innerHTML='<div class=\'project-image-placeholder\'>🏠</div>'">
+                    </div>
+                    <div class="project-info">
+                        <h3>Residencia Familiar López</h3>
+                        <p class="project-location">Culiacán • 8.5 kW</p>
+                        <a href="#contacto" class="project-btn primary">Ver Detalles</a>
+                        <p class="project-desc">Sistema completo con 24 paneles y batería de respaldo</p>
                     </div>
                 </div>
                 
                 <div class="project-card">
-                    <div class="project-image">🏭</div>
-                    <div class="project-content">
-                        <div class="project-tag">Industrial</div>
-                        <h3>Eco-Empresas</h3>
+                    <div class="project-image">
+                        <img src="images/proyecto-2.jpg" alt="Centro Comercial" 
+                             onerror="this.parentElement.innerHTML='<div class=\'project-image-placeholder\'>🏢</div>'">
+                    </div>
+                    <div class="project-info">
+                        <h3>Centro Comercial Sol Plaza</h3>
+                        <p class="project-location">Los Mochis • 150 kW</p>
+                        <a href="#contacto" class="project-btn outline">Ver Detalles</a>
+                        <p class="project-desc">Instalación comercial de 420 paneles con monitoreo 24/7</p>
                     </div>
                 </div>
                 
                 <div class="project-card">
-                    <div class="project-image">🎓</div>
-                    <div class="project-content">
-                        <div class="project-tag">Educación</div>
-                        <h3>Solar Schools</h3>
+                    <div class="project-image">
+                        <img src="images/proyecto-3.jpg" alt="Granja" 
+                             onerror="this.parentElement.innerHTML='<div class=\'project-image-placeholder\'>🌾</div>'">
                     </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-image">🏢</div>
-                    <div class="project-content">
-                        <div class="project-tag">Comercial</div>
-                        <h3>Red Solar Empresarial</h3>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-image">🌾</div>
-                    <div class="project-content">
-                        <div class="project-tag">Agrícola</div>
-                        <h3>AgroSolar</h3>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-image">🏙️</div>
-                    <div class="project-content">
-                        <div class="project-tag">Público</div>
-                        <h3>Iluminando Ciudades</h3>
+                    <div class="project-info">
+                        <h3>Granja Ecológica El Olivar</h3>
+                        <p class="project-location">Guasave • 45 kW</p>
+                        <a href="#contacto" class="project-btn outline">Ver Detalles</a>
+                        <p class="project-desc">Sistema agrícola con 128 paneles de alta eficiencia</p>
                     </div>
                 </div>
             </div>
@@ -252,43 +1307,42 @@
 
     <!-- Testimonials Section -->
     <section class="testimonials" id="testimonios">
-        <div class="section-container">
+        <div class="container">
             <div class="section-header">
-                <div class="section-tag">// Testimonios</div>
-                <h2 class="section-title">Clientes <span>Satisfechos</span></h2>
-                <p class="section-subtitle">Lo que dicen quienes ya confían en nosotros.</p>
+                <h2>Lo que dicen nuestros <span>Clientes</span></h2>
             </div>
             
             <div class="testimonials-grid">
                 <div class="testimonial-card">
-                    <p class="testimonial-text">Ahorro hasta un 60% en la factura de luz. El equipo es profesional, claro y eficiente. ¡Totalmente recomendados!</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">CM</div>
-                        <div>
-                            <div class="author-name">Carla Martínez</div>
-                            <div class="author-role">Cliente Residencial</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <p class="testimonial-text">Hemos reducido los costos operativos de la fábrica significativamente. El sistema vale cada centavo invertido.</p>
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"El ahorro en mi recibo ha sido increíble, antes pagábamos $4,500 pesos y desde que instalaron los paneles pagamos $200 pesos. ¡100% recomendable!"</p>
                     <div class="testimonial-author">
                         <div class="author-avatar">JR</div>
                         <div>
                             <div class="author-name">Jorge Ramírez</div>
-                            <div class="author-role">Propietario de Fábrica</div>
+                            <div class="author-location">Culiacán, Sinaloa</div>
                         </div>
                     </div>
                 </div>
-                
                 <div class="testimonial-card">
-                    <p class="testimonial-text">El sistema inspira a nuestros estudiantes sobre energía renovable. Superaron todas nuestras expectativas.</p>
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Nuestra empresa decidió invertir en energía solar para reducir el consumo. Hemos logrado un ahorro mayor al 90% en nuestro recibo de luz."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">CM</div>
+                        <div>
+                            <div class="author-name">Carlos Mendoza</div>
+                            <div class="author-location">Los Mochis, Sinaloa</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Me animé a invertir en un sistema de energía solar y el ahorro ha sido increíble. Además me da gusto contribuir al medio ambiente."</p>
                     <div class="testimonial-author">
                         <div class="author-avatar">LT</div>
                         <div>
-                            <div class="author-name">Lucía Torres</div>
-                            <div class="author-role">Directora Escolar</div>
+                            <div class="author-name">Laura Torres</div>
+                            <div class="author-location">Mazatlán, Sinaloa</div>
                         </div>
                     </div>
                 </div>
@@ -296,84 +1350,39 @@
         </div>
     </section>
 
-    <!-- Team Section -->
-    <section class="team" id="equipo">
-        <div class="section-container">
-            <div class="section-header">
-                <div class="section-tag">// Nuestro Equipo</div>
-                <h2 class="section-title">Expertos a tu <span>Servicio</span></h2>
-                <p class="section-subtitle">Profesionales comprometidos con tu proyecto.</p>
-            </div>
-            
-            <div class="team-grid">
-                <div class="team-card">
-                    <div class="team-photo">👨‍💼</div>
-                    <h3>Alejandro Torres</h3>
-                    <span>Director de Operaciones</span>
+    <!-- About Section -->
+    <section class="about" id="nosotros">
+        <div class="container">
+            <div class="about-image">
+                <div class="about-image-main">
+                    <img src="images/nosotros.jpg" alt="Equipo EVA Solar" 
+                         onerror="this.src='https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&h=450&fit=crop'">
                 </div>
-                
-                <div class="team-card">
-                    <div class="team-photo">👨‍💼</div>
-                    <h3>Ricardo López</h3>
-                    <span>Coordinador de Ventas</span>
-                </div>
-                
-                <div class="team-card">
-                    <div class="team-photo">👩‍💼</div>
-                    <h3>Mariana Gómez</h3>
-                    <span>Gerente de Innovación</span>
+                <div class="about-badge">
+                    <div class="about-badge-number">15+</div>
+                    <div class="about-badge-text">Años de Experiencia</div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="faq" id="faq">
-        <div class="section-container">
-            <div class="section-header">
-                <div class="section-tag">// Preguntas Frecuentes</div>
-                <h2 class="section-title">Resolvemos tus <span>Dudas</span></h2>
-                <p class="section-subtitle">Las preguntas más comunes sobre energía solar.</p>
-            </div>
-            
-            <div class="faq-container">
-                <div class="faq-item active">
-                    <div class="faq-question">
-                        ¿Cuánto puedo ahorrar con paneles solares?
-                        <span>+</span>
+            <div class="about-content">
+                <h2>¿Por qué elegir <span>EVA Solar</span>?</h2>
+                <p>Somos una empresa especializada en el diseño, desarrollo y construcción de sistemas solares. Contamos con personal altamente capacitado para desarrollar proyectos de alta calidad.</p>
+                <p>Nuestra diferencia es la atención al detalle en diseño, productos y servicio al cliente. Trabajamos solo con las mejores marcas para ofrecerte la máxima calidad y garantía.</p>
+                <div class="about-features">
+                    <div class="about-feature">
+                        <div class="about-feature-icon">✓</div>
+                        <span>Personal Certificado</span>
                     </div>
-                    <div class="faq-answer">
-                        <p>Muchos de nuestros clientes reducen sus facturas de electricidad hasta en un 70%. El ahorro exacto depende de tu consumo actual y el tamaño del sistema instalado.</p>
+                    <div class="about-feature">
+                        <div class="about-feature-icon">✓</div>
+                        <span>Garantía de Operación</span>
                     </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        ¿Qué mantenimiento requiere el sistema?
-                        <span>+</span>
+                    <div class="about-feature">
+                        <div class="about-feature-icon">✓</div>
+                        <span>Monitoreo en Tiempo Real</span>
                     </div>
-                    <div class="faq-answer">
-                        <p>El mantenimiento es mínimo. Solo necesitas limpieza de paneles cada 6 meses y revisiones técnicas anuales. Nuestros sistemas están diseñados para ser de bajo mantenimiento.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        ¿Qué pasa en días nublados o sin sol?
-                        <span>+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>El sistema utiliza energía almacenada en baterías o se complementa automáticamente con la red eléctrica, garantizando suministro continuo las 24 horas.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        ¿Cuánto tiempo tarda la instalación?
-                        <span>+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Una instalación residencial típica tarda entre 1 y 3 días, dependiendo de la complejidad del proyecto y el tamaño del sistema. Proyectos comerciales pueden tomar de 1 a 2 semanas.</p>
+                    <div class="about-feature">
+                        <div class="about-feature-icon">✓</div>
+                        <span>Proyectos Llave en Mano</span>
                     </div>
                 </div>
             </div>
@@ -382,20 +1391,18 @@
 
     <!-- Contact Section -->
     <section class="contact" id="contacto">
-        <div class="contact-container">
+        <div class="container">
             <div class="contact-info">
                 <h2>Inicia tu <span>Transformación Energética</span></h2>
-                <p>Contáctanos hoy y recibe una cotización personalizada sin compromiso. Nuestro equipo está listo para ayudarte a ahorrar.</p>
-                
+                <p>Contáctanos hoy y recibe una cotización personalizada sin compromiso.</p>
                 <div class="contact-methods">
                     <a href="https://wa.me/526677950481" class="contact-method" target="_blank">
-                        <div class="contact-method-icon">📱</div>
+                        <div class="contact-method-icon">💬</div>
                         <div class="contact-method-text">
                             <span>WhatsApp</span>
                             <strong>+52 667 795 0481</strong>
                         </div>
                     </a>
-                    
                     <a href="tel:+526677900107" class="contact-method">
                         <div class="contact-method-icon">📞</div>
                         <div class="contact-method-text">
@@ -403,7 +1410,6 @@
                             <strong>+52 667 790 0107</strong>
                         </div>
                     </a>
-                    
                     <a href="mailto:evasolar.rgz@gmail.com" class="contact-method">
                         <div class="contact-method-icon">✉️</div>
                         <div class="contact-method-text">
@@ -413,42 +1419,40 @@
                     </a>
                 </div>
             </div>
-            
-            <form class="contact-form">
-                <div class="form-group">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required>
+            <form class="contact-form" id="contact-form">
+                <h3 class="form-title">¡Cotiza Gratis!</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nombre *</label>
+                        <input type="text" name="nombre" placeholder="Tu nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Teléfono *</label>
+                        <input type="tel" name="telefono" placeholder="Tu número" required>
+                    </div>
                 </div>
-                
                 <div class="form-group">
-                    <label for="telefono">Teléfono</label>
-                    <input type="tel" id="telefono" name="telefono" placeholder="Tu número de teléfono" required>
+                    <label>Correo electrónico</label>
+                    <input type="email" name="email" placeholder="tu@email.com">
                 </div>
-                
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="tu@email.com" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="servicio">Servicio de Interés</label>
-                    <select id="servicio" name="servicio" required>
-                        <option value="">Selecciona una opción</option>
-                        <option value="Residencial">Energía Solar Residencial</option>
-                        <option value="Empresarial">Sistemas para Empresas</option>
-                        <option value="Comunidades">Energía para Comunidades</option>
-                        <option value="Educativo">Instituciones Educativas</option>
-                        <option value="Agricola">Soluciones Agrícolas</option>
-                        <option value="Starlink">Internet Starlink</option>
-                        <option value="Otro">Otro</option>
+                    <label>Servicio de Interés</label>
+                    <select name="servicio">
+                        <option>-- Seleccionar --</option>
+                        <option>Sistema Residencial</option>
+                        <option>Sistema Comercial</option>
+                        <option>Internet Starlink</option>
+                        <option>Mantenimiento</option>
                     </select>
                 </div>
-                
                 <div class="form-group">
-                    <label for="mensaje">Mensaje</label>
-                    <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos sobre tu proyecto o necesidades..."></textarea>
+                    <label>¿Cuánto paga de luz?</label>
+                    <input type="text" name="pago" placeholder="Ej: $2,500">
                 </div>
-                
+                <div class="form-group">
+                    <label>Mensaje</label>
+                    <textarea name="mensaje" placeholder="Cuéntanos sobre tu proyecto..."></textarea>
+                </div>
                 <button type="submit" class="submit-btn">Enviar Solicitud</button>
             </form>
         </div>
@@ -456,28 +1460,146 @@
 
     <!-- Footer -->
     <footer>
-        <div class="footer-container">
-            <div class="footer-logo">
-                <img src="images/logo-evasolar.png" alt="EVA Solar">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="images/logo-evasolar.png" alt="EVA Solar">
+                    <p>Energía con Integridad. Sistemas de energía solar diseñados a la medida de cada cliente.</p>
+                    <div class="footer-social">
+                        <a href="#">📘</a>
+                        <a href="#">📷</a>
+                        <a href="https://wa.me/526677950481">💬</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Servicios</h4>
+                    <ul>
+                        <li><a href="#servicios">Paneles Solares</a></li>
+                        <li><a href="#servicios">Sistemas Comerciales</a></li>
+                        <li><a href="#servicios">Internet Starlink</a></li>
+                        <li><a href="#servicios">Mantenimiento</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Enlaces</h4>
+                    <ul>
+                        <li><a href="#nosotros">Nosotros</a></li>
+                        <li><a href="#proyectos">Proyectos</a></li>
+                        <li><a href="#testimonios">Testimonios</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li>📍 Culiacán, Sinaloa</li>
+                        <li>📞 667 795 0481</li>
+                        <li>📞 667 790 0107</li>
+                        <li>✉️ evasolar.rgz@gmail.com</li>
+                    </ul>
+                </div>
             </div>
-            
-            <div class="footer-links">
-                <a href="#servicios">Servicios</a>
-                <a href="#proyectos">Proyectos</a>
-                <a href="https://tienda.evasolar.mx" target="_blank">Tienda</a>
-                <a href="#contacto">Contacto</a>
+            <div class="footer-bottom">
+                <p>© 2024 EVA Solar - Energía Verde Alternativa</p>
+                <p>Culiacán, Sinaloa, México</p>
             </div>
-            
-            <div class="footer-copy">© 2024 EVA Solar - Energía Verde Alternativa. Todos los derechos reservados.</div>
         </div>
     </footer>
 
-    <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/526677950481?text=Hola,%20me%20interesa%20cotizar%20un%20sistema%20solar" class="whatsapp-btn" target="_blank" title="Contáctanos por WhatsApp">
-        💬
-    </a>
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/526677950481?text=Hola,%20me%20interesa%20cotizar%20un%20sistema%20de%20paneles%20solares" class="whatsapp-btn" target="_blank">💬</a>
 
-    <!-- JavaScript -->
-    <script src="script.js"></script>
+    <script>
+        // Animación del logo pieza por pieza
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBar = document.getElementById('progress-bar');
+            const loadingScreen = document.getElementById('loading-screen');
+            const animatedLogo = document.getElementById('animated-logo');
+            const logoText = document.getElementById('logo-text');
+            const tagline = document.getElementById('tagline');
+            
+            // Secuencia de animación
+            const animationSequence = [
+                { id: 'hoja', delay: 300 },      // Hoja primero
+                { id: 'panel1', delay: 900 },    // Fila 1
+                { id: 'panel2', delay: 1050 },
+                { id: 'panel3', delay: 1200 },
+                { id: 'panel21', delay: 1400 },  // Fila 2
+                { id: 'panel22', delay: 1550 },
+                { id: 'panel23', delay: 1700 },
+                { id: 'panel31', delay: 1900 },  // Fila 3
+                { id: 'panel32', delay: 2050 },
+                { id: 'panel33', delay: 2200 },
+            ];
+            
+            // Ejecutar animación
+            animationSequence.forEach((item, index) => {
+                setTimeout(() => {
+                    const element = document.getElementById(item.id);
+                    if (element) {
+                        element.classList.add('visible');
+                    }
+                    // Actualizar barra de progreso
+                    const progress = ((index + 1) / animationSequence.length) * 80;
+                    progressBar.style.width = progress + '%';
+                }, item.delay);
+            });
+            
+            // Mostrar texto del logo
+            setTimeout(() => {
+                logoText.classList.add('visible');
+                progressBar.style.width = '90%';
+            }, 2600);
+            
+            // Mostrar tagline
+            setTimeout(() => {
+                tagline.classList.add('visible');
+                progressBar.style.width = '100%';
+            }, 2900);
+            
+            // Agregar efecto de brillo al completar
+            setTimeout(() => {
+                animatedLogo.classList.add('logo-complete');
+            }, 3000);
+            
+            // Ocultar loading screen
+            setTimeout(() => {
+                loadingScreen.classList.add('hidden');
+            }, 3800);
+        });
+
+        // Header scroll
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Form to WhatsApp
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nombre = this.querySelector('input[name="nombre"]').value;
+            const telefono = this.querySelector('input[name="telefono"]').value;
+            const email = this.querySelector('input[name="email"]').value;
+            const servicio = this.querySelector('select[name="servicio"]').value;
+            const pago = this.querySelector('input[name="pago"]').value;
+            const mensaje = this.querySelector('textarea[name="mensaje"]').value;
+            
+            const whatsappMsg = `¡Hola! Me gustaría cotizar:%0A%0A*Nombre:* ${nombre}%0A*Teléfono:* ${telefono}%0A*Email:* ${email}%0A*Servicio:* ${servicio}%0A*Pago de luz:* ${pago}%0A*Mensaje:* ${mensaje}`;
+            window.open(`https://wa.me/526677950481?text=${whatsappMsg}`, '_blank');
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
 </body>
 </html>
