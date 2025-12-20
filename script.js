@@ -1,291 +1,91 @@
-/* =============================================
-   EVA SOLAR - Estilo Futurista
-   script.js
-   ============================================= */
 
-// ===== DOM Content Loaded =====
-document.addEventListener('DOMContentLoaded', function() {
-    initNavigation();
-    initFAQ();
-    initContactForm();
-    initScrollAnimations();
-    initStatsCounter();
-});
-
-// ===== Navigation =====
-function initNavigation() {
-    const nav = document.querySelector('nav');
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    
-    // Scroll effect
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 50) {
-            nav.classList.add('scrolled');
-        } else {
-            nav.classList.remove('scrolled');
-        }
-    });
-    
-    // Mobile menu toggle
-    if (menuToggle) {
-        menuToggle.addEventListener('click', function() {
-            navLinks.classList.toggle('active');
-            this.classList.toggle('active');
-        });
-    }
-    
-    // Close mobile menu on link click
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', function() {
-            navLinks.classList.remove('active');
-            menuToggle.classList.remove('active');
-        });
-    });
-    
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                const headerOffset = 80;
-                const elementPosition = target.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-}
-
-// ===== FAQ Accordion =====
-function initFAQ() {
-    const faqQuestions = document.querySelectorAll('.faq-question');
-    
-    faqQuestions.forEach(question => {
-        question.addEventListener('click', function() {
-            const faqItem = this.parentElement;
-            const isActive = faqItem.classList.contains('active');
+        // Animación del logo pieza por pieza
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBar = document.getElementById('progress-bar');
+            const loadingScreen = document.getElementById('loading-screen');
+            const animatedLogo = document.getElementById('animated-logo');
+            const logoText = document.getElementById('logo-text');
+            const tagline = document.getElementById('tagline');
             
-            // Close all FAQ items
-            document.querySelectorAll('.faq-item').forEach(item => {
-                item.classList.remove('active');
+            // Secuencia de animación
+            const animationSequence = [
+                { id: 'hoja', delay: 300 },      // Hoja primero
+                { id: 'panel1', delay: 900 },    // Fila 1
+                { id: 'panel2', delay: 1050 },
+                { id: 'panel3', delay: 1200 },
+                { id: 'panel21', delay: 1400 },  // Fila 2
+                { id: 'panel22', delay: 1550 },
+                { id: 'panel23', delay: 1700 },
+                { id: 'panel31', delay: 1900 },  // Fila 3
+                { id: 'panel32', delay: 2050 },
+                { id: 'panel33', delay: 2200 },
+            ];
+            
+            // Ejecutar animación
+            animationSequence.forEach((item, index) => {
+                setTimeout(() => {
+                    const element = document.getElementById(item.id);
+                    if (element) {
+                        element.classList.add('visible');
+                    }
+                    // Actualizar barra de progreso
+                    const progress = ((index + 1) / animationSequence.length) * 80;
+                    progressBar.style.width = progress + '%';
+                }, item.delay);
             });
             
-            // Open clicked item if it wasn't active
-            if (!isActive) {
-                faqItem.classList.add('active');
+            // Mostrar texto del logo
+            setTimeout(() => {
+                logoText.classList.add('visible');
+                progressBar.style.width = '90%';
+            }, 2600);
+            
+            // Mostrar tagline
+            setTimeout(() => {
+                tagline.classList.add('visible');
+                progressBar.style.width = '100%';
+            }, 2900);
+            
+            // Agregar efecto de brillo al completar
+            setTimeout(() => {
+                animatedLogo.classList.add('logo-complete');
+            }, 3000);
+            
+            // Ocultar loading screen
+            setTimeout(() => {
+                loadingScreen.classList.add('hidden');
+            }, 3800);
+        });
+
+        // Header scroll
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
             }
         });
-    });
-}
 
-// ===== Contact Form =====
-function initContactForm() {
-    const contactForm = document.querySelector('.contact-form');
-    
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        // Form to WhatsApp
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
             e.preventDefault();
+            const nombre = this.querySelector('input[name="nombre"]').value;
+            const telefono = this.querySelector('input[name="telefono"]').value;
+            const email = this.querySelector('input[name="email"]').value;
+            const servicio = this.querySelector('select[name="servicio"]').value;
+            const pago = this.querySelector('input[name="pago"]').value;
+            const mensaje = this.querySelector('textarea[name="mensaje"]').value;
             
-            // Get form data
-            const formData = new FormData(this);
-            const name = formData.get('nombre') || document.querySelector('input[placeholder*="nombre"]')?.value || '';
-            const phone = formData.get('telefono') || document.querySelector('input[type="tel"]')?.value || '';
-            const email = formData.get('email') || document.querySelector('input[type="email"]')?.value || '';
-            const service = formData.get('servicio') || document.querySelector('select')?.value || '';
-            const message = formData.get('mensaje') || document.querySelector('textarea')?.value || '';
-            
-            // Build WhatsApp message
-            let whatsappMessage = '¡Hola! Me interesa cotizar un sistema solar.%0A%0A';
-            if (name) whatsappMessage += `*Nombre:* ${name}%0A`;
-            if (phone) whatsappMessage += `*Teléfono:* ${phone}%0A`;
-            if (email) whatsappMessage += `*Email:* ${email}%0A`;
-            if (service) whatsappMessage += `*Servicio:* ${service}%0A`;
-            if (message) whatsappMessage += `*Mensaje:* ${message}%0A`;
-            
-            // Open WhatsApp
-            window.open(`https://wa.me/526677950481?text=${whatsappMessage}`, '_blank');
+            const whatsappMsg = `¡Hola! Me gustaría cotizar:%0A%0A*Nombre:* ${nombre}%0A*Teléfono:* ${telefono}%0A*Email:* ${email}%0A*Servicio:* ${servicio}%0A*Pago de luz:* ${pago}%0A*Mensaje:* ${mensaje}`;
+            window.open(`https://wa.me/526677950481?text=${whatsappMsg}`, '_blank');
         });
-    }
-}
 
-// ===== Scroll Animations =====
-function initScrollAnimations() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
         });
-    }, observerOptions);
-    
-    // Add fade-in class to elements
-    const animatedElements = document.querySelectorAll(
-        '.service-card, .project-card, .testimonial-card, .team-card, .stats-card, .faq-item, .about-card'
-    );
-    
-    animatedElements.forEach((el, index) => {
-        el.classList.add('fade-in');
-        el.style.transitionDelay = `${index * 0.1}s`;
-        observer.observe(el);
-    });
-}
-
-// ===== Stats Counter Animation =====
-function initStatsCounter() {
-    const statsNumbers = document.querySelectorAll('.stats-number, .stat-number');
-    
-    const counterObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateCounter(entry.target);
-                counterObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
-    
-    statsNumbers.forEach(stat => {
-        counterObserver.observe(stat);
-    });
-}
-
-function animateCounter(element) {
-    const text = element.textContent;
-    const hasPlus = text.includes('+');
-    const hasPercent = text.includes('%');
-    const hasK = text.includes('K');
-    
-    let endValue = parseFloat(text.replace(/[^0-9.]/g, ''));
-    let suffix = '';
-    
-    if (hasK) {
-        suffix = 'K';
-    }
-    if (hasPlus) {
-        suffix += '+';
-    }
-    if (hasPercent) {
-        suffix = '%';
-    }
-    
-    let startValue = 0;
-    const duration = 2000;
-    const increment = endValue / (duration / 16);
-    
-    function updateCounter() {
-        startValue += increment;
-        if (startValue < endValue) {
-            if (hasK || endValue < 10) {
-                element.textContent = startValue.toFixed(1) + suffix;
-            } else {
-                element.textContent = Math.floor(startValue) + suffix;
-            }
-            requestAnimationFrame(updateCounter);
-        } else {
-            if (hasK) {
-                element.textContent = endValue.toFixed(1) + suffix;
-            } else {
-                element.textContent = Math.floor(endValue) + suffix;
-            }
-        }
-    }
-    
-    updateCounter();
-}
-
-// ===== Utility Functions =====
-
-// Debounce function for performance
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Throttle function for scroll events
-function throttle(func, limit) {
-    let inThrottle;
-    return function(...args) {
-        if (!inThrottle) {
-            func.apply(this, args);
-            inThrottle = true;
-            setTimeout(() => inThrottle = false, limit);
-        }
-    };
-}
-
-// ===== Parallax Effect (Optional) =====
-function initParallax() {
-    const parallaxElements = document.querySelectorAll('.hero-visual, .glow-effect');
-    
-    window.addEventListener('scroll', throttle(function() {
-        const scrolled = window.pageYOffset;
-        
-        parallaxElements.forEach(el => {
-            const speed = el.dataset.speed || 0.5;
-            el.style.transform = `translateY(${scrolled * speed}px)`;
-        });
-    }, 16));
-}
-
-// ===== Typing Effect (Optional) =====
-function typeWriter(element, text, speed = 50) {
-    let i = 0;
-    element.textContent = '';
-    
-    function type() {
-        if (i < text.length) {
-            element.textContent += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
-    }
-    
-    type();
-}
-
-// ===== Preloader (Optional) =====
-function hidePreloader() {
-    const preloader = document.querySelector('.preloader');
-    if (preloader) {
-        preloader.style.opacity = '0';
-        setTimeout(() => {
-            preloader.style.display = 'none';
-        }, 500);
-    }
-}
-
-// Hide preloader when page loads
-window.addEventListener('load', hidePreloader);
-
-// ===== Form Validation =====
-function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-}
-
-function validatePhone(phone) {
-    const re = /^[\d\s\-\+\(\)]{10,}$/;
-    return re.test(phone);
-}
-
-// ===== Console Easter Egg =====
-console.log('%c⚡ EVA Solar', 'font-size: 24px; font-weight: bold; color: #00FF88;');
-console.log('%cEnergía del Futuro', 'font-size: 14px; color: #00D4FF;');
-console.log('%c¿Interesado en trabajar con nosotros? Contáctanos: evasolar.rgz@gmail.com', 'font-size: 12px; color: #8888A0;');
